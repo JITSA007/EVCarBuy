@@ -1,0 +1,7 @@
+{
+  "name": "EVClubIndia - Electric Car Intelligence & Buyer's Guide",
+  "description": "India's premier electric car club & intelligence portal. Verified on-road prices, salary affordability calculator, location-based feature advisor, and real-world range benchmarks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
