@@ -1,6 +1,5 @@
 import React from 'react';
-import { Vehicle } from '../../types/ev';
-import { Compass, Sparkles, Building, Users, MapPin, Award, Zap, DollarSign, ArrowRight } from 'lucide-react';
+import { Compass, Users, MapPin, Award, Zap, DollarSign, ArrowRight, Building } from 'lucide-react';
 
 interface UseCaseSectionProps {
   onSelectVehicle: (slug: string) => void;
@@ -9,7 +8,6 @@ interface UseCaseSectionProps {
 
 export const UseCaseSection: React.FC<UseCaseSectionProps> = ({
   onSelectVehicle,
-  onFilterUseCase
 }) => {
   const useCases = [
     {
@@ -69,17 +67,17 @@ export const UseCaseSection: React.FC<UseCaseSectionProps> = ({
   ];
 
   return (
-    <section className="py-16 border-b border-slate-800/80 bg-slate-900/30">
+    <section className="py-16 border-b border-slate-200 bg-slate-50/50 dark:border-slate-800/80 dark:bg-slate-900/30 transition-colors">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
             <Compass className="h-3.5 w-3.5" />
             <span>Curated Recommendations</span>
           </div>
-          <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
             Best Electric Cars by Use Case
           </h2>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
             Engineered recommendations tailored for distinct driving lifestyles across India.
           </p>
         </div>
@@ -90,36 +88,36 @@ export const UseCaseSection: React.FC<UseCaseSectionProps> = ({
             return (
               <div
                 key={uc.title}
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-6 transition-all hover:border-emerald-500/50 hover:bg-slate-900 hover:shadow-xl hover:shadow-emerald-950/20"
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-xs transition-all hover:border-emerald-500 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/80 dark:hover:border-emerald-500/50 dark:hover:bg-slate-900 dark:hover:shadow-xl"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-400 border border-emerald-500/20">
+                    <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
                       {uc.tag}
                     </span>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800 text-slate-300">
-                      <Icon className="h-4 w-4 text-emerald-400" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      <Icon className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                     </div>
                   </div>
 
-                  <h3 className="mt-3 text-base font-bold text-slate-200">
+                  <h3 className="mt-3 text-base font-bold text-slate-700 dark:text-slate-200">
                     {uc.title}
                   </h3>
 
-                  <p className="mt-1 text-xl font-extrabold text-white">
+                  <p className="mt-1 text-xl font-extrabold text-slate-900 dark:text-white">
                     {uc.evName}
                   </p>
-                  <p className="text-xs font-semibold text-emerald-400">{uc.price}</p>
+                  <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400">{uc.price}</p>
 
-                  <p className="mt-3 text-xs leading-relaxed text-slate-400">
+                  <p className="mt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
                     {uc.highlight}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
                   <button
                     onClick={() => onSelectVehicle(uc.slug)}
-                    className="flex items-center gap-1 text-xs font-bold text-slate-200 hover:text-emerald-400 transition-colors"
+                    className="flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-emerald-600 dark:text-slate-200 dark:hover:text-emerald-400 transition-colors cursor-pointer"
                   >
                     <span>View Specifications</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

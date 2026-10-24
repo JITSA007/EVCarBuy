@@ -1,5 +1,4 @@
 import React from 'react';
-import { FilterCriteria } from '../../types/ev';
 import { ArrowRight, Wallet } from 'lucide-react';
 
 interface BudgetGridSectionProps {
@@ -59,18 +58,18 @@ export const BudgetGridSection: React.FC<BudgetGridSectionProps> = ({ onSelectBu
   ];
 
   return (
-    <section className="py-16 border-b border-slate-800/80 bg-slate-950">
+    <section className="py-16 border-b border-slate-200 bg-white dark:border-slate-800/80 dark:bg-slate-950 transition-colors">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-orange-400">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">
               <Wallet className="h-3.5 w-3.5" />
               <span>Smart Price Segmentation</span>
             </div>
-            <h2 className="mt-1 text-2xl sm:text-3xl font-black text-white">
+            <h2 className="mt-1 text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               Explore EVs by Budget
             </h2>
-            <p className="mt-1 text-sm text-slate-300">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
               Find electric vehicles matching your ex-showroom and on-road budget across India.
             </p>
           </div>
@@ -81,26 +80,26 @@ export const BudgetGridSection: React.FC<BudgetGridSectionProps> = ({ onSelectBu
             <button
               key={tier.label}
               onClick={() => onSelectBudget(tier.min, tier.max, tier.label)}
-              className="group flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/60 p-5 text-left transition-all hover:border-orange-500/50 hover:bg-slate-900 hover:shadow-xl hover:shadow-orange-950/20"
+              className="group flex flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50/80 p-5 text-left transition-all hover:border-orange-500 hover:bg-white hover:shadow-lg dark:border-slate-800/90 dark:bg-slate-900/60 dark:hover:border-orange-500/50 dark:hover:bg-slate-900 dark:hover:shadow-xl cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-black text-white group-hover:text-orange-400 transition-colors">
+                  <span className="text-lg font-black text-slate-900 group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400 transition-colors">
                     {tier.label}
                   </span>
-                  <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs font-bold text-slate-300 group-hover:bg-orange-500/20 group-hover:text-orange-300 border border-slate-700/60 transition-colors">
+                  <span className="rounded-full bg-slate-200 px-2.5 py-0.5 text-xs font-bold text-slate-700 border border-slate-300 group-hover:bg-orange-100 group-hover:text-orange-800 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700/60 dark:group-hover:bg-orange-500/20 dark:group-hover:text-orange-300 transition-colors">
                     {tier.count}
                   </span>
                 </div>
-                <p className="mt-1 text-xs font-semibold text-orange-400/90">{tier.range}</p>
-                <p className="mt-3 text-xs text-slate-300">
-                  <strong className="text-white">Popular:</strong> {tier.popularCars}
+                <p className="mt-1 text-xs font-semibold text-orange-700 dark:text-orange-400/90">{tier.range}</p>
+                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300">
+                  <strong className="text-slate-900 dark:text-white">Popular:</strong> {tier.popularCars}
                 </p>
               </div>
 
-              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-white group-hover:text-orange-400 pt-3 border-t border-slate-800/60">
-                <span className="text-white group-hover:text-orange-400">View EV Cars</span>
-                <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-orange-400 transition-transform group-hover:translate-x-1" />
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold text-slate-900 group-hover:text-orange-600 dark:text-white dark:group-hover:text-orange-400 pt-3 border-t border-slate-200 dark:border-slate-800/60">
+                <span>View EV Cars</span>
+                <ArrowRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-orange-600 dark:text-slate-400 dark:group-hover:text-orange-400 transition-transform group-hover:translate-x-1" />
               </div>
             </button>
           ))}

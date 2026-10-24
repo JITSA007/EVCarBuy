@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Vehicle, SyncAuditEntry } from '../../types/ev';
 import { vehicleDataProvider } from '../../services/dataProvider';
-import { ShieldCheck, RefreshCw, X, CheckCircle2, History, Database, AlertCircle } from 'lucide-react';
+import { RefreshCw, X, CheckCircle2, History, Database, AlertCircle } from 'lucide-react';
 
 interface DataSyncModalProps {
   isOpen: boolean;
@@ -49,42 +49,42 @@ export const DataSyncModal: React.FC<DataSyncModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
-      <div className="relative w-full max-w-xl rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="relative w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl overflow-y-auto max-h-[90vh] dark:border-slate-800 dark:bg-slate-900 text-slate-900 dark:text-white">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
               <Database className="h-4 w-4" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white">Data Freshness &amp; Audit Logs</h3>
-              <p className="text-[11px] text-slate-400">Vehicle spec integrity &amp; manual price management</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Data Freshness &amp; Audit Logs</h3>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Vehicle spec integrity &amp; manual price management</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white">
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:hover:text-white">
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-4 rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-xs text-slate-400 flex items-start gap-2">
-          <AlertCircle className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400 flex items-start gap-2">
+          <AlertCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
           <span>
             Specifications and pricing are based on official OEM releases, ARAI homologation test certificates, and published state EV road-tax policies.
           </span>
         </div>
 
         {/* Admin Quick Price Override */}
-        <div className="mt-6 border-t border-slate-800 pt-4">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
             Manual Price Correction (Admin / Local Override)
           </h4>
           <form onSubmit={handleUpdatePrice} className="mt-3 space-y-3">
             <div>
-              <label className="text-xs text-slate-400">Select Vehicle</label>
+              <label className="text-xs text-slate-600 dark:text-slate-400">Select Vehicle</label>
               <select
                 value={selectedVehicleId}
                 onChange={e => setSelectedVehicleId(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-xs font-bold text-white"
+                className="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
               >
                 {vehicles.map(v => (
                   <option key={v.id} value={v.id}>
@@ -101,11 +101,11 @@ export const DataSyncModal: React.FC<DataSyncModalProps> = ({
                 placeholder="New Starting Price (in Lakh)"
                 value={newStartingPrice}
                 onChange={e => setNewStartingPrice(e.target.value)}
-                className="flex-1 rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white"
+                className="flex-1 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
               />
               <button
                 type="submit"
-                className="rounded-xl bg-emerald-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-400"
+                className="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white hover:bg-emerald-500 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400"
               >
                 Apply Update
               </button>
@@ -113,7 +113,7 @@ export const DataSyncModal: React.FC<DataSyncModalProps> = ({
           </form>
 
           {syncMessage && (
-            <p className="mt-2 text-xs font-bold text-emerald-400 flex items-center gap-1">
+            <p className="mt-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
               <CheckCircle2 className="h-3.5 w-3.5" />
               {syncMessage}
             </p>
@@ -121,15 +121,15 @@ export const DataSyncModal: React.FC<DataSyncModalProps> = ({
         </div>
 
         {/* Audit Logs */}
-        <div className="mt-6 border-t border-slate-800 pt-4">
+        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <History className="h-3.5 w-3.5 text-slate-400" />
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+              <History className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
               Audit Trail &amp; Verification History
             </span>
             <button
               onClick={handleTriggerReverification}
-              className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 hover:underline"
+              className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
             >
               <RefreshCw className="h-3 w-3" />
               Re-check Logs
@@ -140,13 +140,13 @@ export const DataSyncModal: React.FC<DataSyncModalProps> = ({
             {auditLogs.map(log => (
               <div
                 key={log.id}
-                className="rounded-xl border border-slate-800 bg-slate-950/60 p-2.5 text-xs text-slate-300"
+                className="rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300"
               >
                 <div className="flex justify-between font-semibold">
-                  <span className="text-white">{log.action}</span>
-                  <span className="text-[10px] text-slate-400">{log.timestamp.slice(0, 10)}</span>
+                  <span className="text-slate-900 dark:text-white">{log.action}</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">{log.timestamp.slice(0, 10)}</span>
                 </div>
-                <p className="text-[11px] text-slate-400 mt-0.5">{log.details}</p>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">{log.details}</p>
               </div>
             ))}
           </div>

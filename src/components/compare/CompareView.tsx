@@ -5,17 +5,8 @@ import {
   Layers,
   X,
   Plus,
-  Zap,
-  BatteryCharging,
-  Gauge,
-  Shield,
-  Award,
-  CheckCircle2,
-  XCircle,
   Share2,
   Trash2,
-  HelpCircle,
-  ArrowRight,
   Eye,
   EyeOff
 } from 'lucide-react';
@@ -69,23 +60,23 @@ export const CompareView: React.FC<CompareViewProps> = ({
   const handleShareComparison = () => {
     const names = vehicles.map(v => `${v.brand} ${v.name}`).join(' vs ');
     const text = encodeURIComponent(
-      `Compare ${names} on EVClubIndia!\nView full side-by-side EV specs: https://evclubindia.com/compare`
+      `Compare ${names} on BharatEV Live!\nView full side-by-side EV specs: https://bharatev.live/compare`
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
   };
 
   if (vehicles.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 py-16 text-center text-slate-100">
-        <div className="mx-auto max-w-md rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
-          <Layers className="mx-auto h-12 w-12 text-slate-500" />
-          <h2 className="mt-4 text-xl font-bold text-white">No EVs Selected for Comparison</h2>
-          <p className="mt-2 text-xs text-slate-400">
-            Select 2 to 4 electric vehicles from the cars list or popular presets to compare specs, real-world range, charging, and pricing side-by-side.
+      <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 py-16 text-center transition-colors">
+        <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-xl dark:border-slate-800 dark:bg-slate-900/60">
+          <Layers className="mx-auto h-12 w-12 text-slate-400 dark:text-slate-500" />
+          <h2 className="mt-4 text-xl font-bold text-slate-900 dark:text-white">No EVs Selected for Comparison</h2>
+          <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+            Select 2 to 4 electric vehicles from the cars catalog to compare specs, real-world range, charging, and on-road pricing side-by-side.
           </p>
           <button
             onClick={() => setAddCarModalOpen(true)}
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-emerald-500 dark:bg-emerald-500 dark:text-slate-950 dark:hover:bg-emerald-400 shadow-md transition-colors"
           >
             <Plus className="h-4 w-4" />
             <span>Select EVs to Compare</span>
@@ -112,17 +103,17 @@ export const CompareView: React.FC<CompareViewProps> = ({
     if (highlightDifferencesOnly && !isDifferent) return null;
 
     return (
-      <tr className="border-b border-slate-800/60 transition-colors hover:bg-slate-900/40">
-        <td className="w-48 sm:w-60 p-3.5 text-xs font-semibold text-slate-400 bg-slate-950/80 sticky left-0 z-10">
+      <tr className="border-b border-slate-200/80 transition-colors hover:bg-slate-50 dark:border-slate-800/60 dark:hover:bg-slate-900/40">
+        <td className="w-48 sm:w-60 p-3.5 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50/90 dark:bg-slate-950/80 sticky left-0 z-10 border-r border-slate-200/80 dark:border-slate-800/80">
           {label}
         </td>
         {vehicles.map(v => (
-          <td key={v.id} className="p-3.5 text-center text-xs font-medium text-slate-200 min-w-[200px]">
+          <td key={v.id} className="p-3.5 text-center text-xs font-medium text-slate-800 dark:text-slate-200 min-w-[200px]">
             {accessor(v)}
           </td>
         ))}
         {Array.from({ length: Math.max(0, 4 - vehicles.length) }).map((_, i) => (
-          <td key={`empty-col-${i}`} className="p-3.5 text-center text-slate-400 min-w-[200px] border-l border-dashed border-slate-800/40">
+          <td key={`empty-col-${i}`} className="p-3.5 text-center text-slate-400 min-w-[200px] border-l border-dashed border-slate-200 dark:border-slate-800/40">
             -
           </td>
         ))}
@@ -131,19 +122,19 @@ export const CompareView: React.FC<CompareViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 py-8 text-slate-100">
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#0b0f19] dark:text-slate-100 py-8 transition-colors">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header with Tools */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
               <Layers className="h-3.5 w-3.5" />
               <span>Side-by-Side Matrix ({vehicles.length} of 4)</span>
             </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">
+            <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
               Electric Car Comparison
             </h1>
-            <p className="mt-1 text-xs sm:text-sm text-slate-400">
+            <p className="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               Comparing ex-showroom &amp; on-road prices in {selectedCity}, real-world highway range, charging curves, and safety.
             </p>
           </div>
@@ -153,8 +144,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               onClick={() => setHighlightDifferencesOnly(!highlightDifferencesOnly)}
               className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-colors ${
                 highlightDifferencesOnly
-                  ? 'border-emerald-500 bg-emerald-500/20 text-emerald-400'
-                  : 'border-slate-800 bg-slate-900 text-slate-300'
+                  ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400'
+                  : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300'
               }`}
             >
               {highlightDifferencesOnly ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
@@ -163,7 +154,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
 
             <button
               onClick={handleShareComparison}
-              className="flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-3 py-2 text-xs font-bold text-emerald-400 hover:bg-emerald-900/50"
+              className="flex items-center gap-1.5 rounded-xl border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 hover:bg-emerald-100 dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-400 dark:hover:bg-emerald-900/50"
             >
               <Share2 className="h-3.5 w-3.5" />
               <span>Share</span>
@@ -171,7 +162,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
 
             <button
               onClick={onClearAll}
-              className="flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-semibold text-slate-400 hover:text-rose-400"
+              className="flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:text-rose-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-rose-400"
             >
               <Trash2 className="h-3.5 w-3.5" />
               <span>Clear All</span>
@@ -180,22 +171,22 @@ export const CompareView: React.FC<CompareViewProps> = ({
         </div>
 
         {/* Matrix Container */}
-        <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/50 shadow-2xl backdrop-blur-md">
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900/50 backdrop-blur-md">
           <table className="w-full border-collapse text-left">
             {/* Sticky Header Row with Vehicle Cards */}
             <thead>
-              <tr className="border-b border-slate-800 bg-slate-950/90">
-                <th className="w-48 sm:w-60 p-4 text-xs font-bold uppercase tracking-wider text-slate-400 sticky left-0 z-20 bg-slate-950">
+              <tr className="border-b border-slate-200 bg-slate-100/90 dark:border-slate-800 dark:bg-slate-950/90">
+                <th className="w-48 sm:w-60 p-4 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 sticky left-0 z-20 bg-slate-100 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800">
                   Specification
                 </th>
                 {vehicles.map(v => {
                   const onRoad = vehicleDataProvider.calculateOnRoadPrice(v, undefined, selectedCity);
                   return (
                     <th key={v.id} className="p-4 text-center min-w-[220px] align-top">
-                      <div className="relative rounded-xl border border-slate-800 bg-slate-900/90 p-3 shadow-sm">
+                      <div className="relative rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-xs dark:border-slate-800 dark:bg-slate-900/90">
                         <button
                           onClick={() => onRemoveVehicle(v.id)}
-                          className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-rose-500 hover:text-white transition-colors"
+                          className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-rose-500 hover:text-white dark:bg-slate-800 dark:text-slate-400 transition-colors shadow-sm"
                           title="Remove from comparison"
                         >
                           <X className="h-3.5 w-3.5" />
@@ -208,19 +199,19 @@ export const CompareView: React.FC<CompareViewProps> = ({
                           referrerPolicy="no-referrer"
                         />
 
-                        <h3 className="mt-2 text-sm font-extrabold text-white line-clamp-1">
+                        <h3 className="mt-2 text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">
                           {v.brand} {v.name}
                         </h3>
-                        <p className="text-[11px] text-slate-400">{v.segment}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400">{v.segment}</p>
 
-                        <div className="mt-2 text-xs font-extrabold text-emerald-400">
+                        <div className="mt-2 text-xs font-extrabold text-emerald-600 dark:text-emerald-400">
                           ₹{v.startingPriceLakh} – ₹{v.endingPriceLakh} L
                         </div>
-                        <p className="text-[10px] text-slate-400">On-Road: ~₹{onRoad.onRoadTotalLakh}L ({selectedCity})</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400">On-Road: ~₹{onRoad.onRoadTotalLakh}L ({selectedCity})</p>
 
                         <button
                           onClick={() => onSelectVehicle(v.slug)}
-                          className="mt-3 w-full rounded-lg bg-slate-800 py-1.5 text-[11px] font-bold text-white hover:bg-emerald-500 hover:text-slate-950 transition-colors"
+                          className="mt-3 w-full rounded-lg bg-slate-900 py-1.5 text-[11px] font-bold text-white hover:bg-emerald-600 dark:bg-slate-800 dark:hover:bg-emerald-500 dark:text-white transition-colors"
                         >
                           View Details
                         </button>
@@ -234,7 +225,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
                   <th key={`add-slot-${i}`} className="p-4 text-center min-w-[220px] align-middle">
                     <button
                       onClick={() => setAddCarModalOpen(true)}
-                      className="flex h-44 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-800 bg-slate-900/20 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-400 transition-all"
+                      className="flex h-44 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 bg-slate-50/50 text-slate-500 hover:border-emerald-500 hover:text-emerald-600 dark:border-slate-800 dark:bg-slate-900/20 dark:text-slate-400 dark:hover:border-emerald-500/50 dark:hover:text-emerald-400 transition-all"
                     >
                       <Plus className="h-6 w-6 mb-1" />
                       <span className="text-xs font-bold">+ Add EV Car</span>
@@ -247,8 +238,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
 
             <tbody>
               {/* Category: Pricing */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   1. Pricing &amp; On-Road Taxes ({selectedCity})
                 </td>
               </tr>
@@ -257,7 +248,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
                 const p = vehicleDataProvider.calculateOnRoadPrice(v, undefined, selectedCity);
                 const isAffordable = v.id === winners.mostAffordableId;
                 return (
-                  <span className={`font-bold ${isAffordable ? 'text-emerald-400' : 'text-white'}`}>
+                  <span className={`font-bold ${isAffordable ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
                     ₹{p.onRoadTotalLakh} Lakh {isAffordable && '🏆 Lowest'}
                   </span>
                 );
@@ -269,15 +260,15 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Available Variants Count', v => `${v.variants.length} Trim Levels`)}
 
               {/* Category: Range & Efficiency */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   2. Range &amp; Real-World Efficiency
                 </td>
               </tr>
               {renderRow('ARAI Certified Range (MIDC)', v => {
                 const isBest = v.id === winners.bestRangeId;
                 return (
-                  <span className={`font-bold ${isBest ? 'text-emerald-400' : 'text-white'}`}>
+                  <span className={`font-bold ${isBest ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
                     {v.claimedRangeKm} km {isBest && '🏆 Best Range'}
                   </span>
                 );
@@ -287,8 +278,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Efficiency (Wh/km)', v => `${v.efficiencyWhPerKm || Math.round((v.batteryCapacityKwh * 1000) / v.realWorldRangeKm)} Wh/km`)}
 
               {/* Category: Battery & Charging */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   3. Battery &amp; Fast Charging
                 </td>
               </tr>
@@ -297,7 +288,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Max DC Fast Charging Rate', v => {
                 const isFastest = v.id === winners.fastestChargingId;
                 return (
-                  <span className={`font-bold ${isFastest ? 'text-cyan-400' : 'text-white'}`}>
+                  <span className={`font-bold ${isFastest ? 'text-cyan-600 dark:text-cyan-400' : 'text-slate-900 dark:text-white'}`}>
                     {v.dcChargingSpeedKw} kW {isFastest && '⚡ Fastest'}
                   </span>
                 );
@@ -306,8 +297,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('AC Wallbox Home Charging', v => `${v.chargingTimeAcHours} Hours (${v.acChargingSpeedKw} kW)`)}
 
               {/* Category: Performance & Powertrain */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   4. Performance &amp; Powertrain
                 </td>
               </tr>
@@ -316,7 +307,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('0 to 100 km/h Acceleration', v => {
                 const isQuick = v.id === winners.quickestAccelId;
                 return (
-                  <span className={`font-bold ${isQuick ? 'text-purple-400' : 'text-white'}`}>
+                  <span className={`font-bold ${isQuick ? 'text-purple-600 dark:text-purple-400' : 'text-slate-900 dark:text-white'}`}>
                     {v.acceleration0To100} seconds {isQuick && '🚀 Quickest'}
                   </span>
                 );
@@ -325,13 +316,13 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Drive Type / Configuration', v => v.driveType)}
 
               {/* Category: Safety */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   5. Safety &amp; Driver Assistance
                 </td>
               </tr>
               {renderRow('Crash Test Rating', v => (
-                <span className="font-bold text-amber-400">
+                <span className="font-bold text-amber-600 dark:text-amber-400">
                   {v.ncapRating ? `${v.ncapRating}★ ${v.ncapAgency}` : 'Unrated'}
                 </span>
               ))}
@@ -340,8 +331,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('360° Surround Camera', v => (v.camera360 ? 'Available' : 'No'))}
 
               {/* Category: Dimensions */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   6. Dimensions &amp; Practicality
                 </td>
               </tr>
@@ -351,8 +342,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Length × Width × Height', v => `${v.dimensions.lengthMm} × ${v.dimensions.widthMm} × ${v.dimensions.heightMm} mm`)}
 
               {/* Category: Features */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   7. Comfort &amp; Technology Highlights
                 </td>
               </tr>
@@ -363,8 +354,8 @@ export const CompareView: React.FC<CompareViewProps> = ({
               {renderRow('Connected Car Suite', v => (v.connectedCar ? 'Yes' : 'No'))}
 
               {/* Category: Warranty */}
-              <tr className="bg-slate-900/80 border-b border-slate-800">
-                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+              <tr className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800">
+                <td colSpan={5} className="p-3 text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                   8. Warranty Coverage
                 </td>
               </tr>
@@ -405,10 +396,10 @@ const AddCarModal: React.FC<AddCarModalProps> = ({ availableVehicles, onSelect, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h3 className="text-base font-bold text-white">Add Electric Car to Comparison</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-white">
+      <div className="relative w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">Add Electric Car to Comparison</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:hover:text-white">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -419,7 +410,7 @@ const AddCarModal: React.FC<AddCarModalProps> = ({ availableVehicles, onSelect, 
             placeholder="Search EV by brand or model..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
           />
         </div>
 
@@ -428,7 +419,7 @@ const AddCarModal: React.FC<AddCarModalProps> = ({ availableVehicles, onSelect, 
             <button
               key={car.id}
               onClick={() => onSelect(car)}
-              className="w-full flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-left hover:border-emerald-500 hover:bg-slate-800 transition-colors"
+              className="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3 text-left hover:border-emerald-500 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/60 dark:hover:bg-slate-800 transition-colors"
             >
               <div className="flex items-center gap-3">
                 <img
@@ -438,18 +429,18 @@ const AddCarModal: React.FC<AddCarModalProps> = ({ availableVehicles, onSelect, 
                   referrerPolicy="no-referrer"
                 />
                 <div>
-                  <p className="text-sm font-bold text-white">{car.brand} {car.name}</p>
-                  <p className="text-xs text-slate-400">{car.bodyType} • {car.claimedRangeKm} km range</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white">{car.brand} {car.name}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{car.bodyType} • {car.claimedRangeKm} km range</p>
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-xs font-bold text-emerald-400">₹{car.startingPriceLakh}L</span>
-                <span className="block text-[10px] text-slate-400">+ Add</span>
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">₹{car.startingPriceLakh}L</span>
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400">+ Add</span>
               </div>
             </button>
           ))}
           {filtered.length === 0 && (
-            <p className="py-6 text-center text-xs text-slate-400">No matching EV cars available.</p>
+            <p className="py-6 text-center text-xs text-slate-500 dark:text-slate-400">No matching EV cars available.</p>
           )}
         </div>
       </div>

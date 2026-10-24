@@ -20,12 +20,12 @@ export const CompareFloatingBar: React.FC<CompareFloatingBarProps> = ({
   return (
     <div
       id="compare-floating-tray"
-      className="fixed bottom-0 left-0 right-0 z-40 border-t border-orange-500/30 bg-slate-950/95 px-4 py-3 shadow-2xl backdrop-blur-lg transition-transform"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-700 bg-slate-900/95 px-4 py-3 shadow-2xl backdrop-blur-lg transition-transform dark:border-orange-500/30 dark:bg-slate-950/95"
     >
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
         {/* Left info */}
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/15 text-orange-400 border border-orange-500/30">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/20 text-orange-400 border border-orange-500/30">
             <Layers className="h-5 w-5" />
           </div>
           <div>
@@ -48,7 +48,7 @@ export const CompareFloatingBar: React.FC<CompareFloatingBarProps> = ({
           {selectedVehicles.map(car => (
             <div
               key={car.id}
-              className="group flex items-center gap-2 rounded-xl border border-slate-750 bg-slate-900/90 py-1.5 pl-2 pr-2.5 shadow-sm transition-all hover:border-orange-500/50"
+              className="group flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/90 py-1.5 pl-2 pr-2.5 shadow-sm transition-all hover:border-orange-500/50"
             >
               <img
                 src={car.heroImage}
@@ -66,7 +66,7 @@ export const CompareFloatingBar: React.FC<CompareFloatingBarProps> = ({
               </div>
               <button
                 onClick={() => onRemoveVehicle(car.id)}
-                className="ml-1 rounded-full p-1 text-slate-400 transition-colors hover:bg-slate-800 hover:text-rose-400"
+                className="ml-1 rounded-full p-1 text-slate-400 transition-colors hover:bg-slate-700 hover:text-rose-400"
                 title={`Remove ${car.name}`}
               >
                 <X className="h-3.5 w-3.5" />
@@ -78,7 +78,7 @@ export const CompareFloatingBar: React.FC<CompareFloatingBarProps> = ({
           {Array.from({ length: Math.max(0, 4 - selectedVehicles.length) }).map((_, i) => (
             <div
               key={`empty-${i}`}
-              className="hidden sm:flex h-11 w-32 items-center justify-center rounded-xl border border-dashed border-slate-800 bg-slate-900/30 text-xs text-slate-400"
+              className="hidden sm:flex h-11 w-32 items-center justify-center rounded-xl border border-dashed border-slate-700 bg-slate-800/40 text-xs text-slate-400"
             >
               + Add EV
             </div>
@@ -89,10 +89,10 @@ export const CompareFloatingBar: React.FC<CompareFloatingBarProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onClearAll}
-            className="flex items-center gap-1.5 rounded-lg border border-slate-800 px-3 py-2 text-xs font-semibold text-slate-400 transition-colors hover:border-slate-700 hover:bg-slate-900 hover:text-rose-400"
+            className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-2 text-xs font-semibold text-slate-300 transition-colors hover:border-slate-600 hover:bg-slate-800 hover:text-rose-400"
           >
             <Trash2 className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline text-white">Clear</span>
+            <span className="hidden sm:inline">Clear</span>
           </button>
 
           <button

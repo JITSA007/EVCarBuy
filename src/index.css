@@ -1,205 +1,29 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --bg-canvas: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-elevated: #f1f5f9;
-  --border-subtle: #e2e8f0;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --brand-orange: #ea580c;
-  --brand-emerald: #059669;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-html.light, body.light-theme {
-  --bg-canvas: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-elevated: #f1f5f9;
-  --border-subtle: #e2e8f0;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --brand-orange: #ea580c;
-  --brand-emerald: #059669;
+html, body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.light {
+  color-scheme: light;
   background-color: #f8fafc;
   color: #0f172a;
 }
 
-html.dark, body.dark-theme {
-  --bg-canvas: #0b0f19;
-  --bg-card: #111827;
-  --bg-elevated: #1e293b;
-  --border-subtle: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --brand-orange: #f97316;
-  --brand-emerald: #10b981;
+html.dark {
+  color-scheme: dark;
   background-color: #0b0f19;
   color: #f8fafc;
-}
-
-@layer base {
-  * {
-    border-color: var(--border-subtle);
-  }
-
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    overflow-x: hidden;
-    line-height: 1.6;
-    letter-spacing: -0.011em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.25s ease, color 0.25s ease;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
-  }
-}
-
-/* ==========================================================================
-   LIGHT MODE: Refined, pleasant, highly legible editorial styling
-   ========================================================================== */
-
-.light-theme {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-}
-
-/* Canvas backgrounds */
-.light-theme .bg-slate-950,
-.light-theme .bg-slate-950\/90,
-.light-theme .bg-slate-950\/95,
-.light-theme .bg-slate-950\/80,
-.light-theme .bg-slate-950\/70,
-.light-theme .bg-slate-950\/60 {
-  background-color: #f8fafc !important;
-  color: #0f172a;
-}
-
-/* Card surfaces */
-.light-theme .bg-slate-900,
-.light-theme .bg-slate-900\/95,
-.light-theme .bg-slate-900\/90,
-.light-theme .bg-slate-900\/80,
-.light-theme .bg-slate-900\/70,
-.light-theme .bg-slate-900\/60,
-.light-theme .bg-slate-900\/50,
-.light-theme .bg-slate-900\/40,
-.light-theme .bg-slate-900\/30 {
-  background-color: #ffffff !important;
-  color: #0f172a;
-}
-
-/* Elevated chips and tertiary backgrounds */
-.light-theme .bg-slate-800,
-.light-theme .bg-slate-800\/90,
-.light-theme .bg-slate-800\/80,
-.light-theme .bg-slate-800\/60,
-.light-theme .bg-slate-800\/50 {
-  background-color: #f1f5f9 !important;
-  color: #334155 !important;
-}
-
-/* Subtle borders */
-.light-theme .border-slate-800,
-.light-theme .border-slate-800\/80,
-.light-theme .border-slate-800\/60,
-.light-theme .border-slate-800\/50,
-.light-theme .border-slate-700,
-.light-theme .border-slate-700\/80,
-.light-theme .border-slate-700\/60,
-.light-theme .border-slate-700\/50 {
-  border-color: #e2e8f0 !important;
-}
-
-/* Typography contrast for light theme */
-.light-theme h1,
-.light-theme h2,
-.light-theme h3,
-.light-theme h4 {
-  color: #0f172a !important;
-}
-
-.light-theme .text-slate-100,
-.light-theme .text-slate-200 {
-  color: #1e293b !important;
-}
-
-.light-theme .text-slate-300 {
-  color: #334155 !important;
-}
-
-.light-theme .text-slate-400 {
-  color: #475569 !important;
-}
-
-.light-theme .text-slate-500 {
-  color: #64748b !important;
-}
-
-/* Card headings with text-white should become dark charcoal */
-.light-theme div:not([class*="bg-orange"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-slate-950"]) > h1.text-white,
-.light-theme div:not([class*="bg-orange"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-slate-950"]) > h2.text-white,
-.light-theme div:not([class*="bg-orange"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-slate-950"]) > h3.text-white,
-.light-theme div:not([class*="bg-orange"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-slate-950"]) > h4.text-white,
-.light-theme span.text-white:not([class*="bg-"]):not(button *):not(a *) {
-  color: #0f172a;
-}
-
-/* Retain high-contrast white text for solid buttons and filled badges in light mode */
-.light-theme button.bg-orange-500,
-.light-theme button.bg-orange-600,
-.light-theme button.bg-emerald-500,
-.light-theme button.bg-emerald-600,
-.light-theme button.bg-blue-600,
-.light-theme a.bg-orange-500,
-.light-theme a.bg-orange-600,
-.light-theme a.bg-emerald-500,
-.light-theme [class*="bg-gradient-to-"] span.text-white,
-.light-theme button[class*="bg-gradient-"] span,
-.light-theme button[class*="bg-gradient-"],
-.light-theme button.bg-orange-500 *,
-.light-theme button.bg-emerald-500 *,
-.light-theme button.bg-emerald-600 *,
-.light-theme button.bg-slate-900,
-.light-theme button.bg-slate-900 * {
-  color: #ffffff !important;
-}
-
-/* Input fields in light mode */
-.light-theme input,
-.light-theme select,
-.light-theme textarea {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-}
-
-.light-theme input::placeholder,
-.light-theme textarea::placeholder {
-  color: #94a3b8 !important;
-}
-
-/* Card shadows in light mode for pleasant depth without slop */
-.light-theme .rounded-2xl.border,
-.light-theme .rounded-xl.border {
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
-}
-
-/* Sticky header in light mode */
-.light-theme header {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-bottom-color: #e2e8f0 !important;
-}
-
-/* Top live intel bar */
-.light-theme .top-intel-bar {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
 }
 
 /* Custom subtle scrollbar */
@@ -214,7 +38,7 @@ html.dark, body.dark-theme {
   background: #cbd5e1;
   border-radius: 9999px;
 }
-.dark-theme ::-webkit-scrollbar-thumb {
+.dark ::-webkit-scrollbar-thumb {
   background: #334155;
 }
 ::-webkit-scrollbar-thumb:hover {

@@ -2,8 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { STATE_EV_POLICIES, StateEvPolicy } from '../../data/stateEvPolicies';
 import { Vehicle } from '../../types/ev';
 import { 
-  Building2, ShieldCheck, Zap, Sparkles, CheckCircle2, 
-  HelpCircle, ChevronRight, FileText, IndianRupee, Car
+  Building2, ShieldCheck, Zap, CheckCircle2, 
+  ChevronRight, FileText
 } from 'lucide-react';
 
 interface StateSubsidyExplorerViewProps {
@@ -63,39 +63,39 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
   const costPerKm = (fullChargeCost / (activeVehicle?.realWorldRangeKm || 300)).toFixed(2);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100 transition-colors">
       {/* Header Banner */}
-      <div className="mb-8 rounded-2xl border border-orange-500/20 bg-gradient-to-br from-slate-900 via-slate-900 to-orange-950/30 p-6 sm:p-8">
+      <div className="mb-8 rounded-2xl border border-orange-200 bg-gradient-to-br from-white via-slate-50 to-orange-50/50 p-6 sm:p-8 shadow-xs dark:border-orange-500/20 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-orange-950/30">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="mb-2 flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500/10 px-3 py-1 text-xs font-semibold text-orange-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800 border border-orange-200 dark:bg-orange-500/10 dark:text-orange-400 dark:border-orange-500/30">
                 <Building2 className="h-3.5 w-3.5" /> Bharat State EV Subsidies &amp; RTO Explorer
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30">
                 <ShieldCheck className="h-3 w-3" /> Gazette Verified 2026
               </span>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
               State-Wise EV Subsidies &amp; Road Tax Waivers
             </h1>
-            <p className="mt-1 text-sm text-slate-300 sm:text-base">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300 sm:text-base">
               Explore official road tax exemptions, direct bank transfer subsidies, and subsidized EV electricity tariffs across Bharat.
             </p>
           </div>
-          <div className="rounded-xl border border-slate-700/60 bg-slate-800/80 p-4 text-center">
-            <span className="text-xs uppercase tracking-wider text-slate-400">Road Tax Saved on EV</span>
-            <div className="text-2xl font-black text-emerald-400 sm:text-3xl">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 text-center shadow-xs dark:border-slate-700/60 dark:bg-slate-800/80">
+            <span className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Road Tax Saved on EV</span>
+            <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 sm:text-3xl">
               ₹{(roadTaxSavedRupees / 100000).toFixed(2)} Lakh
             </div>
-            <span className="text-xs text-slate-400">vs equivalent petrol/diesel car</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">vs equivalent petrol/diesel car</span>
           </div>
         </div>
       </div>
 
       {/* State Selection Chips */}
       <div className="mb-8">
-        <label className="mb-3 block text-sm font-semibold text-slate-200">
+        <label className="mb-3 block text-sm font-bold text-slate-900 dark:text-white">
           Select State or Union Territory:
         </label>
         <div className="flex flex-wrap gap-2">
@@ -106,16 +106,16 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
                 key={policy.stateCode}
                 id={`btn-state-${policy.stateCode.toLowerCase()}`}
                 onClick={() => setSelectedStateCode(policy.stateCode)}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/30'
-                    : 'border border-slate-800 bg-slate-900 text-slate-300 hover:border-slate-700 hover:text-white'
+                    ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
+                    : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:text-slate-900 shadow-2xs dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-white'
                 }`}
               >
                 <span>{policy.stateName}</span>
                 {policy.roadTaxExemptionPercent === 100 && (
                   <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                    isSelected ? 'bg-white/20 text-white' : 'bg-emerald-500/20 text-emerald-400'
+                    isSelected ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-400'
                   }`}>
                     0% Tax
                   </span>
@@ -131,67 +131,67 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
         {/* Left Column: Official Policy Breakdown (7 Cols) */}
         <div className="space-y-6 lg:col-span-7">
           {/* Policy Overview Card */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6">
-            <div className="mb-4 flex items-center justify-between border-b border-slate-800 pb-4">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900/90">
+            <div className="mb-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">
                   {activePolicy.stateName} EV Policy Overview
                 </h2>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Notification: {activePolicy.officialNotification}
                 </p>
               </div>
-              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
+              <span className="rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
                 {activePolicy.policyValidity}
               </span>
             </div>
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-3.5">
-                <span className="text-xs text-slate-400">Road Tax Exemption</span>
-                <div className="mt-1 text-xl font-black text-emerald-400">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 dark:border-slate-800/80 dark:bg-slate-950/60">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Road Tax Exemption</span>
+                <div className="mt-1 text-xl font-black text-emerald-600 dark:text-emerald-400">
                   {activePolicy.roadTaxExemptionPercent}%
                 </div>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">
                   {activePolicy.roadTaxExemptionPercent === 100 ? 'Zero Road Tax' : 'Concessional Slab'}
                 </span>
               </div>
 
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-3.5">
-                <span className="text-xs text-slate-400">Registration Fee</span>
-                <div className="mt-1 text-xl font-black text-emerald-400">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 dark:border-slate-800/80 dark:bg-slate-950/60">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Registration Fee</span>
+                <div className="mt-1 text-xl font-black text-emerald-600 dark:text-emerald-400">
                   {activePolicy.registrationFeeWaived ? 'Waived (₹0)' : 'Nominal'}
                 </div>
-                <span className="text-[11px] text-slate-500">RTO Smart Card Only</span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">RTO Smart Card Only</span>
               </div>
 
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-3.5 sm:col-span-1 col-span-2">
-                <span className="text-xs text-slate-400">Home EV Tariff</span>
-                <div className="mt-1 text-xl font-black text-orange-400">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-3.5 sm:col-span-1 col-span-2 dark:border-slate-800/80 dark:bg-slate-950/60">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Home EV Tariff</span>
+                <div className="mt-1 text-xl font-black text-orange-600 dark:text-orange-400">
                   ₹{activePolicy.evElectricityTariffPerUnit.toFixed(2)}/kWh
                 </div>
-                <span className="text-[11px] text-slate-500">Dedicated EV Meter</span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">Dedicated EV Meter</span>
               </div>
             </div>
 
             {/* Policy Summary Terms */}
-            <div className="mt-5 rounded-xl border border-slate-800 bg-slate-950/40 p-4 text-sm text-slate-300">
-              <div className="mb-1 flex items-center gap-1.5 font-semibold text-white">
-                <FileText className="h-4 w-4 text-orange-400" /> Official Terms &amp; Scope:
+            <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50/80 p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
+              <div className="mb-1 flex items-center gap-1.5 font-semibold text-slate-900 dark:text-white">
+                <FileText className="h-4 w-4 text-orange-600 dark:text-orange-400" /> Official Terms &amp; Scope:
               </div>
               <p className="leading-relaxed">{activePolicy.subsidyTerms}</p>
             </div>
 
             {/* Key Policy Highlights */}
             <div className="mt-5">
-              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-400">
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Key Benefits for Electric Car Buyers:
               </h3>
               <ul className="space-y-2.5">
                 {activePolicy.keyHighlights.map((highlight, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
                     <span>{highlight}</span>
                   </li>
                 ))}
@@ -200,42 +200,42 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
           </div>
 
           {/* Home Charging Cost Calculator for Selected State */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6">
-            <h3 className="mb-2 text-lg font-bold text-white flex items-center gap-2">
-              <Zap className="h-5 w-5 text-orange-400" />
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900/90">
+            <h3 className="mb-2 text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Zap className="h-5 w-5 text-orange-600 dark:text-orange-400" />
               Home Charging Cost in {activePolicy.stateName}
             </h3>
-            <p className="text-xs text-slate-400 mb-4">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mb-4">
               At the state EV tariff of ₹{activePolicy.evElectricityTariffPerUnit}/kWh, charging at home is dramatically cheaper than petrol or diesel.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                <span className="text-xs text-slate-400">Cost for Full 100% Charge</span>
-                <div className="mt-1 text-2xl font-black text-white">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/70">
+                <span className="text-xs text-slate-500 dark:text-slate-400">Cost for Full 100% Charge</span>
+                <div className="mt-1 text-2xl font-black text-slate-900 dark:text-white">
                   ₹{Math.round(fullChargeCost)}
                 </div>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">
                   For {activeVehicle.name} ({activeVehicle.batteryCapacityKwh} kWh)
                 </span>
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                <span className="text-xs text-slate-400">Effective Running Cost</span>
-                <div className="mt-1 text-2xl font-black text-emerald-400">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/70">
+                <span className="text-xs text-slate-500 dark:text-slate-400">Effective Running Cost</span>
+                <div className="mt-1 text-2xl font-black text-emerald-600 dark:text-emerald-400">
                   ₹{costPerKm} / km
                 </div>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">
                   vs ₹7.50/km for Petrol
                 </span>
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-                <span className="text-xs text-slate-400">Monthly 1,200 km Fuel Bill</span>
-                <div className="mt-1 text-2xl font-black text-orange-400">
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/70">
+                <span className="text-xs text-slate-500 dark:text-slate-400">Monthly 1,200 km Fuel Bill</span>
+                <div className="mt-1 text-2xl font-black text-orange-600 dark:text-orange-400">
                   ₹{Math.round(parseFloat(costPerKm) * 1200)}
                 </div>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">
                   Saves ~₹7,800/month
                 </span>
               </div>
@@ -245,25 +245,25 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
 
         {/* Right Column: Live On-Road Price Simulator for Selected Vehicle (5 Cols) */}
         <div className="space-y-6 lg:col-span-5">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 sticky top-24">
-            <h3 className="text-lg font-bold text-white flex items-center justify-between">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs sticky top-24 dark:border-slate-800 dark:bg-slate-900/90">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center justify-between">
               <span>On-Road Price Simulator</span>
-              <span className="text-xs font-normal text-slate-400">{activePolicy.stateName}</span>
+              <span className="text-xs font-normal text-slate-500 dark:text-slate-400">{activePolicy.stateName}</span>
             </h3>
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
               Select an electric car to calculate the exact state RTO and net on-road price:
             </p>
 
             {/* Vehicle Selector */}
             <div className="mt-4">
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                 Choose Electric Car:
               </label>
               <select
                 id="select-subsidy-vehicle"
                 value={selectedVehicleId}
                 onChange={e => setSelectedVehicleId(e.target.value)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2.5 text-sm text-white focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-orange-500 focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white shadow-2xs"
               >
                 {vehicles.map(v => (
                   <option key={v.id} value={v.id}>
@@ -274,7 +274,7 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
             </div>
 
             {/* Selected Car Preview Card */}
-            <div className="mt-4 flex items-center gap-3.5 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+            <div className="mt-4 flex items-center gap-3.5 rounded-xl border border-slate-200 bg-slate-50/80 p-3 dark:border-slate-800 dark:bg-slate-950/60">
               <img
                 src={activeVehicle.heroImage}
                 alt={activeVehicle.name}
@@ -282,10 +282,10 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
                 referrerPolicy="no-referrer"
               />
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-bold text-white truncate">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate">
                   {activeVehicle.brand} {activeVehicle.name}
                 </h4>
-                <div className="flex items-center gap-2 text-xs text-slate-400">
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                   <span>{activeVehicle.batteryCapacityKwh} kWh</span>
                   <span>•</span>
                   <span>{activeVehicle.realWorldRangeKm} km real range</span>
@@ -295,7 +295,7 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
                 <button
                   id={`btn-view-car-${activeVehicle.slug}`}
                   onClick={() => onSelectVehicle(activeVehicle.slug)}
-                  className="rounded-lg bg-slate-800 p-2 text-slate-300 hover:text-white hover:bg-slate-700"
+                  className="rounded-lg bg-slate-100 p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700 cursor-pointer"
                   title="View vehicle details"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -304,51 +304,51 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
             </div>
 
             {/* Detailed Price Breakdown Table */}
-            <div className="mt-5 space-y-2.5 text-sm border-t border-slate-800 pt-4">
-              <div className="flex justify-between text-slate-300">
+            <div className="mt-5 space-y-2.5 text-sm border-t border-slate-200 dark:border-slate-800 pt-4">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>Ex-Showroom Price (Base Trim)</span>
-                <span className="font-semibold text-white">₹{exShowroom.toFixed(2)} Lakh</span>
+                <span className="font-semibold text-slate-900 dark:text-white">₹{exShowroom.toFixed(2)} Lakh</span>
               </div>
 
-              <div className="flex justify-between text-slate-300">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span className="flex items-center gap-1">
                   RTO Road Tax ({activePolicy.stateName})
                   {activePolicy.roadTaxExemptionPercent === 100 && (
-                    <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] text-emerald-400 font-bold">100% Waived</span>
+                    <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-800 font-bold dark:bg-emerald-500/20 dark:text-emerald-400">100% Waived</span>
                   )}
                 </span>
-                <span className="font-semibold text-emerald-400">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
                   {evRoadTaxRupees === 0 ? '₹0' : `₹${(evRoadTaxRupees / 100000).toFixed(2)} Lakh`}
                 </span>
               </div>
 
-              <div className="flex justify-between text-slate-300">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>RTO Registration &amp; Smart Card</span>
-                <span className="font-medium text-white">
+                <span className="font-medium text-slate-900 dark:text-white">
                   {regFee === 0 ? '₹0 (Waived)' : `₹${regFee}`}
                 </span>
               </div>
 
-              <div className="flex justify-between text-slate-300">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>Comprehensive Insurance (Est. 3-Year)</span>
-                <span className="font-medium text-white">₹{(insuranceRupees / 100000).toFixed(2)} Lakh</span>
+                <span className="font-medium text-slate-900 dark:text-white">₹{(insuranceRupees / 100000).toFixed(2)} Lakh</span>
               </div>
 
               {activePolicy.cashSubsidyAvailable && (
-                <div className="flex justify-between text-emerald-400 bg-emerald-500/10 p-2 rounded-lg font-medium">
+                <div className="flex justify-between text-emerald-800 bg-emerald-50 p-2 rounded-lg font-semibold dark:text-emerald-400 dark:bg-emerald-500/10">
                   <span>State Direct DBT Subsidy</span>
                   <span>- ₹{activePolicy.maxSubsidyAmountLakh.toFixed(2)} Lakh</span>
                 </div>
               )}
 
-              <div className="border-t border-slate-800 pt-3 mt-3 flex justify-between items-baseline">
+              <div className="border-t border-slate-200 dark:border-slate-800 pt-3 mt-3 flex justify-between items-baseline">
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-slate-400">Estimated On-Road</span>
-                  <div className="text-xs text-emerald-400">
+                  <span className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Estimated On-Road</span>
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 font-bold">
                     Includes ₹{(roadTaxSavedRupees / 100000).toFixed(2)}L Tax Savings
                   </div>
                 </div>
-                <div className="text-2xl font-black text-white">
+                <div className="text-2xl font-black text-slate-900 dark:text-white">
                   ₹{netOnRoadLakh} Lakh
                 </div>
               </div>
@@ -358,7 +358,7 @@ export const StateSubsidyExplorerView: React.FC<StateSubsidyExplorerViewProps> =
             <div className="mt-6">
               <a
                 href="#cars"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-4 py-3 text-sm font-bold text-white hover:bg-orange-500 shadow-lg shadow-orange-600/30 transition-all"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-4 py-3 text-sm font-bold text-white hover:bg-orange-500 shadow-md transition-all cursor-pointer"
               >
                 <span>Browse All EVs Eligible for {activePolicy.stateName} Subsidy</span>
                 <ChevronRight className="h-4 w-4" />
